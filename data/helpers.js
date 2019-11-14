@@ -10,12 +10,7 @@ module.exports = {
 function remove(id) {
     return db('cats')
     .del()
-    .then(([id]) => {
-        return db('cats')
-        .where({ id })
-        .first()
-    })
-
+    .where({id})
 }
 
 function insert(cat) {

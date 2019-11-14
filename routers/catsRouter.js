@@ -27,4 +27,19 @@ router.post('/', (req, res) => {
     .catch(err => res.status(500).json({ error: 'Could not add cat'}))
 })
 
+router.put('/:id', (req, res) => {
+    const changes = req.body;
+    const { id } = req.params;
+    db.update(id, changes)
+    .then(updated => res.status(200).json(updated))
+    .catch(err => res.status(500).json({ error: 'could not update cat'}))
+})
+
+router.delete('/:id', (req, res) => {
+    const { id } = req.params;
+
+    db.remove(id)
+    .then(deleted => res.status(200).json(deleted))
+    .catch(err => res.status(500).json({ error: 'Could not delete cat'}))
+})
 module.exports = router;

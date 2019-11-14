@@ -74,6 +74,8 @@ describe('cats model tests', () => {
         })
     })
 
+    // describe('delete', () => {})
+
   
     
 
