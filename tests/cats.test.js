@@ -2,7 +2,7 @@ const server = require('../server')
 const request = require('supertest');
 const db = require('../data/db-config')
 
-const { insert, find, findById } = require('../data/helpers')
+const { insert, find, findById, update } = require('../data/helpers')
 
 describe('cats router responses', () => {
 
@@ -61,6 +61,16 @@ describe('cats model tests', () => {
 
             expect(cat).toEqual(dbCat)
 
+        })
+    })
+
+    describe('update', () => {
+        it('should return the cat that was provided, but from the db', async () => {
+            let changes = await update(3, {name: 'MUFASA'})
+            let cat = await findById(3)
+
+            expect(changes).toEqual(cat)
+            
         })
     })
 

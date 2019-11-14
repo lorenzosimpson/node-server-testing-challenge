@@ -34,12 +34,12 @@ function find() {
 }
 
 function update(id, cat) {
-    return db('cats').update(cat)
+    return db('cats')
     .where({ id })
-    .then(([id]) => {
-        return db('cats')
-        .where({ id })
-        .first()
+    .update(cat)
+    .then(async () => {
+        let updated = await findById(id)
+        return updated;
     })
 }
 
