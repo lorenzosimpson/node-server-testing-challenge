@@ -2,7 +2,7 @@ const server = require('../server')
 const request = require('supertest');
 const db = require('../data/db-config')
 
-const { insert, find } = require('../data/helpers')
+const { insert, find, findById } = require('../data/helpers')
 
 describe('cats router responses', () => {
 
@@ -51,6 +51,16 @@ describe('cats model tests', () => {
            
            expect(cats).toHaveLength(2)
            expect(cats.length).toBeDefined()
+        })
+    })
+
+    describe('insert', () => {
+        it('should return newly added cat', async() => {
+            let cat = await insert({ name: 'simba', favorite_food: 'gravy'})
+            let dbCat = await findById(cat.id)
+
+            expect(cat).toEqual(dbCat)
+
         })
     })
 
