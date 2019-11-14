@@ -2,7 +2,7 @@ const server = require('../server')
 const request = require('supertest');
 const db = require('../data/db-config')
 
-const { insert, find, findById, update } = require('../data/helpers')
+const { insert, find, findById, update, remove } = require('../data/helpers')
 
 describe('cats router responses', () => {
 
@@ -74,7 +74,14 @@ describe('cats model tests', () => {
         })
     })
 
-    // describe('delete', () => {})
+    describe('delete', () => {
+        it('returns count of 1 deleted record', async() => {
+            let records = await remove(1)
+            
+
+            expect(records).toEqual(1)
+        })
+    })
 
   
     

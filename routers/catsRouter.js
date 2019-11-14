@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     const cat = req.body;
     db.insert(cat)
-    .then(added => res.status(200).json(added))
+    .then(added => res.status(201).json(added))
     .catch(err => res.status(500).json({ error: 'Could not add cat'}))
 })
 
@@ -35,11 +35,14 @@ router.put('/:id', (req, res) => {
     .catch(err => res.status(500).json({ error: 'could not update cat'}))
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', async (req, res) => {
     const { id } = req.params;
+    const toDelete = await db.findById(id)
 
     db.remove(id)
-    .then(deleted => res.status(200).json(deleted))
+    .then(deleted => {
+        res.status(200).json(toDelete)
+    })
     .catch(err => res.status(500).json({ error: 'Could not delete cat'}))
 })
 module.exports = router;
