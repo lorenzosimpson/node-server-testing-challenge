@@ -1,10 +1,10 @@
 const express = require('express');
 const helmet = require('helmet');
 
+const apiRouter = require('./routers/apiRouter')
+
 const server = express();
 
-server.use('/api', (req, res) => {
-    res.status(200).json(`API running`)
-})
+server.use('/api', apiRouter)
 
 module.exports = server;
